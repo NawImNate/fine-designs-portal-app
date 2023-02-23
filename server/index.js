@@ -10,13 +10,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // MW
-app.use(
-  cors({
-    origin: "http://localhost:3000/",
-  })
-);
+const corsOptions = {
+  origin: ["http://localhost:5000", "http://localhost:3000"],
+  optionsSuccessStatus: 200,
+};
 
-// post route
+app.use(cors(corsOptions));
+
+// Users registration post route
 app.use("/api/users", userRoute);
 
 // MDB connection
